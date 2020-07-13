@@ -21,7 +21,7 @@ public class Quote {
     @JsonProperty("tradedDate")
     private String tradedDate;
     @JsonProperty("data")
-    private List<Data> data;
+    private List<QuoteData> data;
     @JsonProperty("lastUpdateTime")
     private String lastUpdateTime;
 }

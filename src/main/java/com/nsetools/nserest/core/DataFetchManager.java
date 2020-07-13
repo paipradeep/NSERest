@@ -15,6 +15,8 @@ public class DataFetchManager {
 	private static final String QUOTE_ARGS = "&illiquid=0&smeFlag=0&itpFlag=0";
 
 	public static final String QUOTE_RESPONSE_DIV = "responseDiv";
+
+	public static final String TOP_GAINERS_BASE_URL = "";
 	
 	public String getQuoteFetchURL(String companyName) {
 		StringBuilder quoteURL = new StringBuilder(QUOTE_BASE_URL);
@@ -47,5 +49,27 @@ public class DataFetchManager {
 		System.out.println("Dom element as JSON for url - " + url + " and id - " + id + ":" + domEleAsJSON);
 		return domEleAsJSON;
 
+	}
+
+	public String getResponseAsJSON(String url) {
+		String responseJSON = null;
+		WebClient client = new WebClient();
+		client.getOptions().setCssEnabled(false);
+		client.getOptions().setJavaScriptEnabled(false);
+		try {
+			HtmlPage page = client.getPage(url);
+			//DomElement domElement = page.getElementById(id);
+			responseJSON = page.asText();
+		} catch (FailingHttpStatusCodeException fsce) {
+
+		} catch (MalformedURLException me) {
+
+		} catch (IOException ioe) {
+
+		} finally {
+			client.close();
+		}		
+		System.out.println("JSON response from url- " + url +  ":" + responseJSON);
+		return responseJSON;
 	}
 }

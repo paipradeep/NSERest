@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true )
-public class Data {
+public class QuoteData {
     @JsonProperty("pricebandupper")
     private String pricebandupper;
     @JsonProperty("symbol")

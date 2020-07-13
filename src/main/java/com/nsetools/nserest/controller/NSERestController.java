@@ -10,7 +10,7 @@ import com.nsetools.nserest.core.*;
 import com.nsetools.nserest.model.Quote;
 
 @RestController
-public class QuoteController {
+public class NSERestController {
 	
 	@GetMapping("/getQuote")
 	public Quote quote(@RequestParam(value = "companySymbol") String companySymbol) {
@@ -26,5 +26,12 @@ public class QuoteController {
 			return null;
 		}
 		
+	}
+
+	@GetMapping("topGainers")
+	public Object topGainers() {
+		DataFetchManager dfm = new DataFetchManager();
+		String jsonResponse = dfm.getResponseAsJSON(url)
+		return null;
 	}
 }
