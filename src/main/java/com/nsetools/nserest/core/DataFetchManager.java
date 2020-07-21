@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.UnexpectedPage;
 
 public class DataFetchManager {
 
@@ -16,7 +18,7 @@ public class DataFetchManager {
 
 	public static final String QUOTE_RESPONSE_DIV = "responseDiv";
 
-	public static final String TOP_GAINERS_BASE_URL = "";
+	public static final String TOP_GAINERS_BASE_URL = "https://www1.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json";
 	
 	public String getQuoteFetchURL(String companyName) {
 		StringBuilder quoteURL = new StringBuilder(QUOTE_BASE_URL);
@@ -57,9 +59,8 @@ public class DataFetchManager {
 		client.getOptions().setCssEnabled(false);
 		client.getOptions().setJavaScriptEnabled(false);
 		try {
-			HtmlPage page = client.getPage(url);
-			//DomElement domElement = page.getElementById(id);
-			responseJSON = page.asText();
+			Page page = client.getPage(url);
+			responseJSON = ((UnexpectedPage)page).getWebResponse().getContentAsString();
 		} catch (FailingHttpStatusCodeException fsce) {
 
 		} catch (MalformedURLException me) {
