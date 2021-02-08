@@ -6,3 +6,4 @@ target/test-classes
 .classpath
 .factorypath
 HELP.md
+/target/

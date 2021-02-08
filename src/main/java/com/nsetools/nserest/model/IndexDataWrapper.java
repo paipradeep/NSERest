@@ -3,7 +3,6 @@ package com.nsetools.nserest.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,15 +16,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true )
-public class Quote {
-    @JsonProperty("tradedDate")
-    private String tradedDate;
-    @JsonProperty("data")
-    private List<QuoteData> data;
-    @JsonProperty("lastUpdateTime")
-    private String lastUpdateTime;
-    
-	public List<QuoteData> getData() {
+public class IndexDataWrapper {
+
+	private List<IndexData> data;
+	
+	private int code;
+
+	public List<IndexData> getData() {
 		return this.data;
 	}
 }

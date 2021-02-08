@@ -2,12 +2,15 @@ package com.nsetools.nserest.core;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.nsetools.nserest.model.IndexData;
 import com.gargoylesoftware.htmlunit.UnexpectedPage;
 
 public class DataFetchManager {
@@ -19,6 +22,8 @@ public class DataFetchManager {
 	public static final String QUOTE_RESPONSE_DIV = "responseDiv";
 
 	public static final String TOP_GAINERS_BASE_URL = "https://www1.nseindia.com/live_market/dynaContent/live_analysis/gainers/niftyGainers1.json";
+	
+	public static final String INDEX_DATA_URL = "http://www1.nseindia.com/homepage/Indices1.json";
 	
 	public String getQuoteFetchURL(String companyName) {
 		StringBuilder quoteURL = new StringBuilder(QUOTE_BASE_URL);
@@ -72,5 +77,15 @@ public class DataFetchManager {
 		}		
 		System.out.println("JSON response from url- " + url +  ":" + responseJSON);
 		return responseJSON;
+	}
+	
+	/* Other Utility methods below */
+	public List<String> getAllIndicesNames(List<IndexData> indices) {
+		
+		List<String> indicesNames = new ArrayList<String>();
+		for(IndexData index:indices) {
+			indicesNames.add(index.getName());
+		}
+		return indicesNames;
 	}
 }
